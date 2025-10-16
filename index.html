@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Портфолио - Разработчик проекта "CheckScam"</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            overflow: hidden;
+            height: 100vh;
+            background-color: #0a0a0a;
+        }
+
+        /* Экран входа */
+        #entry-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(15px);
+            z-index: 100;
+            cursor: pointer;
+            transition: all 1s ease;
+        }
+
+        #entry-screen h1 {
+            color: white;
+            font-size: 2.5rem;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+
+        /* Основное содержимое */
+        #main-content {
+            display: none;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        /* Фон */
+        #background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+        }
+
+        /* Затемнение фона */
+        #background-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 2;
+        }
+
+        /* Контент портфолио */
+        #portfolio-content {
+            position: relative;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Аватарка */
+        #avatar {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 4px solid white;
+            margin-bottom: 25px;
+            object-fit: cover;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Имя и описание */
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        #description {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        /* Контакты */
+        #contacts {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .contact-btn {
+            display: flex;
+            align-items: center;
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .contact-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-btn i {
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+
+        /* Аудиоплеер */
+        #audio-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 10px 15px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+        }
+
+        #play-pause {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        #song-info {
+            font-size: 0.9rem;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            h2 {
+                font-size: 2rem;
+            }
+            
+            #description {
+                font-size: 1rem;
+            }
+            
+            .contact-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            #avatar {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Экран входа -->
+    <div id="entry-screen">
+        <h1>Click to enter...</h1>
+    </div>
+
+    <!-- Основное содержимое -->
+    <div id="main-content">
+        <!-- Фон -->
+        <div id="background"></div>
+        <div id="background-overlay"></div>
+        
+        <!-- Контент портфолио -->
+        <div id="portfolio-content">
+            <img id="avatar" src="" alt="Аватар">
+            <h2>Ваше Имя</h2>
+            <p id="description">Разработчик проекта "CheckScam", эксперт по выявлению мошенников.</p>
+            
+            <div id="contacts">
+                <!-- Контакты будут добавлены здесь -->
+            </div>
+        </div>
+        
+        <!-- Аудиоплеер -->
+        <div id="audio-player">
+            <button id="play-pause"><i class="fas fa-play"></i></button>
+            <div id="song-info">Dayang - Big Baby Tape</div>
+        </div>
+    </div>
+
+    <script>
+        // Элементы DOM
+        const entryScreen = document.getElementById('entry-screen');
+        const mainContent = document.getElementById('main-content');
+        const background = document.getElementById('background');
+        const avatar = document.getElementById('avatar');
+        const contactsContainer = document.getElementById('contacts');
+        const playPauseBtn = document.getElementById('play-pause');
+        const audioPlayer = document.createElement('audio');
+        
+        // Настройки (замените на свои)
+        const settings = {
+            backgroundImage: '', // https://i.ibb.co/m5XK7H2g/Pin-Down-io-fokinm107-1760622031.gif
+            avatarImage: '', //  https://ibb.co/PG9y85P0
+            contacts: [
+                { name: 'Telegram', url: 'https://t.me/zhelydok', icon: 'fab fa-telegram' }
+                // Добавьте другие контакты по необходимости
+            ]
+        };
+        
+        // Инициализация
+        function initPortfolio() {
+            // Установка фона
+            if (settings.backgroundImage) {
+                background.style.backgroundImage = `url('${settings.backgroundImage}')`;
+            }
+            
+            // Установка аватарки
+            if (settings.avatarImage) {
+                avatar.src = settings.avatarImage;
+            }
+            
+            // Добавление контактов
+            settings.contacts.forEach(contact => {
+                const contactBtn = document.createElement('a');
+                contactBtn.href = contact.url;
+                contactBtn.target = '_blank';
+                contactBtn.className = 'contact-btn';
+                contactBtn.innerHTML = `<i class="${contact.icon}"></i> ${contact.name}`;
+                contactsContainer.appendChild(contactBtn);
+            });
+            
+            // Настройка аудио
+            audioPlayer.src = ''; // https://screenapp.io/app/v/-irlUISj7g
+            audioPlayer.loop = true;
+            
+            // Обработчик для экрана входа
+            entryScreen.addEventListener('click', () => {
+                entryScreen.style.opacity = '0';
+                setTimeout(() => {
+                    entryScreen.style.display = 'none';
+                    mainContent.style.display = 'block';
+                    // Автовоспроизведение музыки (может не работать в некоторых браузерах)
+                    audioPlayer.play().catch(e => {
+                        console.log('Автовоспроизведение заблокировано. Нажмите кнопку воспроизведения.');
+                    });
+                }, 1000);
+            });
+            
+            // Управление аудио
+            let isPlaying = false;
+            playPauseBtn.addEventListener('click', () => {
+                if (isPlaying) {
+                    audioPlayer.pause();
+                    playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+                } else {
+                    audioPlayer.play();
+                    playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                }
+                isPlaying = !isPlaying;
+            });
+        }
+        
+        // Запуск инициализации после загрузки страницы
+        window.addEventListener('DOMContentLoaded', initPortfolio);
+    </script>
+</body>
+</html>
