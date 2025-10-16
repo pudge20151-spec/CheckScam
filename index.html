@@ -244,10 +244,11 @@
         const playPauseBtn = document.getElementById('play-pause');
         const audioPlayer = document.createElement('audio');
         
-        // Настройки (замените на свои)
+        // Настройки с локальными путями
         const settings = {
-            backgroundImage: '', // https://i.ibb.co/m5XK7H2g/Pin-Down-io-fokinm107-1760622031.gif
-            avatarImage: '', //  https://ibb.co/PG9y85P0
+            backgroundImage: 'images/background.gif', // Путь к фону
+            avatarImage: 'images/avatar.jpg', // Путь к аватарке
+            audioFile: 'music/dayang-big-baby-tape.mp3', // Путь к музыке
             contacts: [
                 { name: 'Telegram', url: 'https://t.me/zhelydok', icon: 'fab fa-telegram' }
                 // Добавьте другие контакты по необходимости
@@ -276,8 +277,8 @@
                 contactsContainer.appendChild(contactBtn);
             });
             
-            // Настройка аудио
-            audioPlayer.src = ''; // https://screenapp.io/app/v/-irlUISj7g
+            // Настройка аудио с локальным файлом
+            audioPlayer.src = settings.audioFile;
             audioPlayer.loop = true;
             
             // Обработчик для экрана входа
@@ -286,7 +287,7 @@
                 setTimeout(() => {
                     entryScreen.style.display = 'none';
                     mainContent.style.display = 'block';
-                    // Автовоспроизведение музыки (может не работать в некоторых браузерах)
+                    // Автовоспроизведение музыки
                     audioPlayer.play().catch(e => {
                         console.log('Автовоспроизведение заблокировано. Нажмите кнопку воспроизведения.');
                     });
